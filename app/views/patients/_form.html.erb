@@ -1,0 +1,11 @@
+<%= simple_form_for @patient do |form| %>
+  <%= form.input :first_name %>
+  <%= form.input :last_name %>
+  <%= form.input :email %>
+  <%= form.input :age, as: :integer, input_html: { min: 1, max: 130 } %>
+  <br>
+  <%= form.button :submit, class: "btn btn-success" %>
+  <p>
+    <%= link_to "< Back", :back %>
+  </p>
+<% end %>

@@ -1,0 +1,10 @@
+<%= simple_form_for @diagnosis_item do |form| %>
+  <%= form.input :content, as: :text %>
+  <%= form.association :patient, collection: @patients, label_method: :full_name, value_method: :id, label: "Patient", include_blank: false %>
+  <%= form.association :physician, collection: @physicians, label_method: :full_name, value_method: :id, label: "Physician", include_blank: false %>
+  <br>
+  <%= form.button :submit, class: "btn btn-success" %>
+  <p>
+    <%= link_to "< Back", :back %>
+  </p>
+<% end %>

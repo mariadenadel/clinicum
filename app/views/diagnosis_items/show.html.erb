@@ -1,0 +1,19 @@
+<div class="row g-0">
+  <div class="col col-xs-4 col-sm-6 col-md-6 col-lg-4">
+    <div class="p-3 border bg-light">
+      <h5 class="card-header">Patient: <%= @diagnosis_item.patient.full_name %></h5>
+      <div class="card-body text-dark">
+        <p class="card-text">Diagnosis Item № <%= @diagnosis_item.id %></p>
+        <p class="card-text">Physician: <%= @diagnosis_item.physician.full_name %></p>
+        <p class="card-text"><%= @diagnosis_item.content %></p>
+      </div>
+      <div class="card-footer bg-transparent border-dark">
+        <%= link_to "Edit", edit_diagnosis_item_path(@diagnosis_item), class: "btn btn-outline-primary" %>
+        <%= link_to "Delete", diagnosis_item_path(@diagnosis_item), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+    <%= link_to "< Back", :back %> <br>
+    <%= link_to "< Back to diagnosis_items", diagnosis_items_path %>
+    </div>
+  </div>
+</div>

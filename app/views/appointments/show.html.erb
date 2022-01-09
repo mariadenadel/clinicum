@@ -1,0 +1,19 @@
+<div class="row g-0">
+  <div class="col col-xs-4 col-sm-6 col-md-6 col-lg-4">
+    <div class="p-3 border bg-light">
+      <h5 class="card-header">Appointments №<%= @appointment.id %></h5>
+      <div class="card-body text-dark">
+        <p class="card-text"><%= @appointment.appointment_date.strftime("%d %B %Y %H:%M") %></p>
+        <p class="card-text">Patient: <%= @appointment.patient.full_name %> </p>
+        <p class="card-text">Physician: <%= @appointment.physician.full_name %></p>
+      </div>
+      <div class="card-footer bg-transparent border-dark">
+        <%= link_to "Edit", edit_appointment_path(@appointment), class: "btn btn-outline-primary" %>
+        <%= link_to "Delete", appointment_path(@appointment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+    <%= link_to "< Back", :back %> <br>
+    <%= link_to "< Back to appointments", appointments_path %>
+    </div>
+  </div>
+</div>
