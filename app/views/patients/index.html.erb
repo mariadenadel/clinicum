@@ -3,9 +3,11 @@
     <div class="col-sm-10">
       <h1>All Patients</h1>
     </div>
-    <div class="col-sm-2">
-      <%= link_to "New Patient", new_patient_path, class: "btn btn-primary btn-lg" %>
-    </div>
+    <% if can? :create, @patients %>
+      <div class="col-sm-2">
+        <%= link_to "New Patient", new_patient_path, class: "btn btn-primary btn-lg" %>
+      </div>
+    <% end %>
   </div>
 </div>
 <table class="table table-striped">
@@ -15,7 +17,11 @@
     <th>Last Name</th>
     <th>Email</th>
     <th>Age</th>
-    <th>Actions</th>
+    <th>
+    <% if can?(:update, @patients) || can?(:destroy, @patients) %>
+      Actions
+    <% end %>
+    </th>
   </tr>
   <% @patients.each do |patient| %>
     <tr>
@@ -24,9 +30,19 @@
       <td> <%= patient.last_name %> </td>
       <td> <%= patient.email %> </td>
       <td> <%= patient.age %> </td>
-      <td>
-        <%= link_to "Edit", edit_patient_path(patient.id), class: "btn btn-outline-primary" %>
-        <%= link_to "Delete", patient_path(patient.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+      <td class="actions">
+        <% if can? :update, @patients %>
+            <%= link_to "Edit", edit_patient_path(patient.id), class: "btn btn-outline-primary" %>
+        <% end %>
+        <% if can? :destroy, @patients %>
+            <%= link_to "Delete", patient_path(patient.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+        <% end %>
+        <% if can? :manage, @diagnosis_items %>
+          <%= link_to "Load diagnosis items", "#patient_id#{patient.id}", data: { bs_toggle: "collapse" },
+                aria: { controls: "patient_id#{patient.id}", expanded: false }, class: "btn btn-outline-success collapsed load-diagnosis",
+                id: "#{patient.id}" %>
+        <% end %>
+        <div class="collapse" id='patient_id<%= "#{patient.id}"%>'></div>
       </td>
     </tr>
   <% end %>

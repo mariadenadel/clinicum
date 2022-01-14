@@ -4,7 +4,7 @@ class Patient < ApplicationRecord
   has_many :diagnosis_items
 
   validates_each :first_name, :last_name do |record, attr, value|
-    record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
+    record.errors.add(attr, "must start with upper case") if value =~ /\A[[:lower:]]/
   end
 
   validates :first_name, presence: true, length: { minimum: 2, too_short: "%{count} characters is the minumum allowed" }

@@ -7,10 +7,12 @@
         <p class="card-text">Patient: <%= @appointment.patient.full_name %> </p>
         <p class="card-text">Physician: <%= @appointment.physician.full_name %></p>
       </div>
-      <div class="card-footer bg-transparent border-dark">
-        <%= link_to "Edit", edit_appointment_path(@appointment), class: "btn btn-outline-primary" %>
-        <%= link_to "Delete", appointment_path(@appointment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
-      </div>
+      <% if can? :update || :destroy, @appointment %>
+        <div class="card-footer bg-transparent border-dark">
+          <%= link_to "Edit", edit_appointment_path(@appointment), class: "btn btn-outline-primary" %>
+          <%= link_to "Delete", appointment_path(@appointment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+        </div>
+      <% end %>
     </div>
     <%= link_to "< Back", :back %> <br>
     <%= link_to "< Back to appointments", appointments_path %>

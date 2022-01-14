@@ -1,18 +1,7 @@
 class PhysiciansController < ApplicationController
-  def index
-    @physicians = Physician.all
-  end
-
-  def show
-    @physician = Physician.find(params[:id])
-  end
-
-  def new
-    @physician = Physician.new
-  end
+  load_and_authorize_resource
 
   def create
-    @physician = Physician.new(physician_params)
     if @physician.save
       redirect_to physician_path(@physician)
     else
@@ -20,12 +9,7 @@ class PhysiciansController < ApplicationController
     end
   end
 
-  def edit
-    @physician = Physician.find(params[:id])
-  end
-
   def update
-    @physician = Physician.find(params[:id])
     if @physician.update(physician_params)
       redirect_to physician_path(@physician)
     else
@@ -34,7 +18,6 @@ class PhysiciansController < ApplicationController
   end
 
   def destroy
-    @physician = Physician.find(params[:id])
     @physician.destroy
     redirect_to physicians_path
   end

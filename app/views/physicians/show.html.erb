@@ -7,10 +7,12 @@
         <p class="card-text">Phone number: <%= @physician.phone_number %></p>
         <p class="card-text">Level: <%= @physician.level %></p>
       </div>
-      <div class="card-footer bg-transparent border-dark">
-        <%= link_to "Edit", edit_physician_path(@physician), class: "btn btn-outline-primary" %>
-    <%= link_to "Delete", physician_path(@physician), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
-      </div>
+      <% if can? :update || :destroy, @physicians %>
+        <div class="card-footer bg-transparent border-dark">
+          <%= link_to "Edit", edit_physician_path(@physician), class: "btn btn-outline-primary" %>
+          <%= link_to "Delete", physician_path(@physician), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+        </div>
+      <% end %>
     </div>
     <%= link_to "< Back", :back %> <br>
     <%= link_to "< Back to Physicians", physicians_path %>
